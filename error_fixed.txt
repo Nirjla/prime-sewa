@@ -1,0 +1,3 @@
+Giving all permissions to the prime-sewa
+nirjla@nirjla ~ $ sudo chmod -R 777 /var/www/html/prime-sewa
+[sudo] password for nirjla: 

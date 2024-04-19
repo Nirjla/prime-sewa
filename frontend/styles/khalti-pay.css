@@ -1,0 +1,42 @@
+*{
+      box-sizing:content-box;
+}
+
+.khalticontainer {
+      width: 500px;
+      border: 2px solid #5C2D91;
+      margin: 0 auto;
+      padding: 30px;
+  }
+  
+  input {
+      display: block;
+      width: 100%;
+      padding: 8px 0;
+      margin: 10px 0;
+  }
+  
+  button {
+      display: block;
+      background-color: #5C2D91;
+      border: none;
+      color: white;
+      cursor: pointer;
+  
+      width: 100%;
+      padding: 8px 0;
+      margin: 2px 0;
+  }
+  
+  button:hover {
+      opacity: 0.8;
+  }
+  .main-container{
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+      height:100vh;
+  }
