@@ -1,7 +1,7 @@
 <?php
 session_start();
-echo $_SESSION['user_id'];
-echo $_SESSION['status'];
+// echo $_SESSION['user_id'];
+// echo $_SESSION['status'];
 include "../frontend/db.php";
 include('header.php');
 
@@ -89,8 +89,10 @@ if ($result->num_rows > 0) {
                                                 <td> <?php echo $event['seat_limit']; ?></td>
                                                 <td> <?php echo $event['status']; ?></td>
                                                 <td>
-                                                      <a href="edit-event.php/?id=<?= $event['id'] ?>">Edit</a>
-                                                      <a href="delete.php/?id=<?= $event['id'] ?>">Delete</a>
+                                                      <div class="d-flex gap-2">
+                                                      <a href="edit-event.php/?id=<?= $event['id'] ?>" class='btn btn-primary'>Edit</a>
+                                                      <a href="delete.php/?id=<?= $event['id'] ?>" class='btn btn-primary'>Delete</a>
+                                                      </div>
                                                 </td>
 
                                           </tr>

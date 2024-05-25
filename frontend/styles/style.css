@@ -341,6 +341,11 @@ header {
 }
 .ps__ue--img {
   overflow: hidden;
+
+}
+.ps__ue--img img{
+  height: 300px;
+  object-fit: cover;
 }
 .ps__ue--headline {
   color: var(--primary--color);
@@ -370,8 +375,7 @@ header {
   background-color: #fff;
 } */
 .ps__ue--content {
-  bottom: 106px;
-  /* border-bottom: 1px solid #f2f2f2; */
+  bottom: 125px;  /* border-bottom: 1px solid #f2f2f2; */
 }
 .ps__ue--content {
   width: 90px;
@@ -528,6 +532,7 @@ header {
 }
 .donation-content {
   padding: 40px 0;
+  width:625px;
   color: var(--color-accent);
   span {
     font-weight: 400;
@@ -541,6 +546,7 @@ header {
 .donation-box {
   display: flex;
   flex-direction: row;
+  align-items:center;
 }
 .donation-payment--bar {
   h5 {

@@ -49,8 +49,9 @@ if ($result->num_rows > 0) {
                                                             $index + 1 ?></th>
                                           <td><?= $volunteer['name'] ?></td>
                                           <td><?= $volunteer['event_title'] ?></td>
-                                          <td><?= $volunteer['apply_date'] ?></td>
-                                          <td><?= $volunteer['v_status']?'Accepted':'' ?></td>
+                                          <td><?= date('Y-m-d', strtotime($volunteer['created_at'])) ?></td>
+
+                                          <td><?= $volunteer['v_status'] ? 'Accepted' : '' ?></td>
                                           <td><?= $volunteer['remarks'] ?></td>
                                     </tr>
 

@@ -23,6 +23,13 @@ SET e.seat_limit = e.seat_limit - $count ,
 }
 if (!empty($_GET['status'])) {
   $_SESSION['status'] = "Logout Successfully";
+  unset($_SESSION['status']);
+  // session_destroy();
+}
+if(!empty($_GET['payment'])){
+  $_SESSION['payment'] = "Payment Success";
+  unset( $_SESSION['payment'] );
+ 
 }
 
 
@@ -40,15 +47,17 @@ ORDER BY
 $query2 = "SELECT d.id, d.donation_title, d.donation_desc, d.donation_img, d.organization_name, d.organization_location,
 du.donate_id, CEIL(SUM(du.amount/100)) AS total_amount
 FROM donations d
-JOIN donations_users du ON d.id = du.donate_id
-GROUP BY d.id,d.user_id, d.donation_title, d.donation_desc, d.donation_img, d.organization_name, d.organization_location, du.donate_id";
+LEFT JOIN donations_users du ON d.id = du.donate_id
+GROUP BY d.id,d.user_id, d.donation_title, d.donation_desc, d.donation_img, d.organization_name, d.organization_location, du.donate_id
+";
 $result = $conn->query($query);
 $result2 = $conn->query($query2);
 
-if ($result->num_rows > 0 && $result2->num_rows > 0) {
+if ($result->num_rows > 0 || $result2->num_rows > 0) {
   $events = $result->fetch_all(MYSQLI_ASSOC);
   $donations = $result2->fetch_all(MYSQLI_ASSOC);
   // print_r($events);
+  // print_r($donations);
 } else {
   $events = [];
   $donations = [];
@@ -178,7 +187,7 @@ if ($result->num_rows > 0 && $result2->num_rows > 0) {
               </div>
             <?php endforeach ?>
 
-           
+
           </div>
         </div>
       </div>
@@ -280,7 +289,7 @@ if ($result->num_rows > 0 && $result2->num_rows > 0) {
                     </div>
                     <div class="donation-info d-flex ">
                       <div>Collected NRS </div>
-                      <div class="donation-amount"><?= $donation['total_amount'] ?></div>
+                      <div class="donation-amount"><?= $donation['total_amount'] ? $donation['total_amount'] : '0' ?></div>
                     </div>
                   </div>
                   <!-- <div class="ps__ue--right-meta d-flex justify-content-between font-xs"> -->
@@ -369,12 +378,12 @@ if ($result->num_rows > 0 && $result2->num_rows > 0) {
     </div>
   </div>
 </div>
-<?=
-isset($_SESSION['status']) ? '
-<p id="status">' . $_SESSION['status'] .
-  '</p>
-' : '';
-unset($_SESSION['status']);
-?>
+<?= isset($_SESSION['status']) ? '<p id="status">' . $_SESSION['status'] . '</p>' : ''; ?>
+<?php unset($_SESSION['status']); ?>
+
+<?= isset($_SESSION['payment_status']) ? '<p id="status">' . $_SESSION['payment_status'] . '</p>' : ''; ?>
+<?php unset($_SESSION['payment_status']); ?>
+
+
 <?php include('./footer.php')
 ?>

@@ -22,9 +22,7 @@ if ($result2->num_rows > 0) {
 }
 
 $current_date = date('Y-m-d'); // today's date
-echo $current_date;
 $before_month = date('Y-m-d', strtotime("-$month months", strtotime($current_date)));
-echo $before_month;
 // $query = "SELECT u.* ,MAX(v.id) as v_id, COUNT(*) as total_volunteering FROM users u join volunteers v on v.user_id = u.id
 // join events e on e.id = v.event_id where e.created_at > '$before_month' and v.status=1 and v.request=0  GROUP BY v.user_id";
 $query1 = "SELECT v.user_id,COUNT(DISTINCT v.event_id) AS total_volunteering
@@ -40,13 +38,11 @@ WHERE v.status = 0 AND v.request = 1 AND e.created_at > '$before_month' ORDER BY
 $result2 = $conn->query($query2);
 if ($result2->num_rows > 0) {
       $requests = $result2->fetch_all(MYSQLI_ASSOC);
-      print_r($requests);
 }
 $result1 = $conn->query($query1);
 // print_r($result);
 if ($result1->num_rows > 0) {
       $count_volunteers = $result1->fetch_all(MYSQLI_ASSOC);
-      print_r($count_volunteers);
 } else {
       $count_volunteers = [];
 }
@@ -72,6 +68,11 @@ if ($result1->num_rows > 0) {
                               </tr>
                         </thead>
                         <tbody>
+                        <?php if (empty($count_volunteers)) : ?>
+    <tr>
+        <td colspan="4">No requests available</td>
+    </tr>
+<?php else : ?>
                               <?php foreach ($count_volunteers as $index => $count_volunteer) : ?>
 
                                     <tr>
@@ -84,6 +85,7 @@ if ($result1->num_rows > 0) {
                                     </tr>
 
                               <?php endforeach; ?>
+                              <?php endif; ?>
                         </tbody>
 
                   </table>
@@ -111,6 +113,11 @@ if ($result1->num_rows > 0) {
                               </tr>
                         </thead>
                         <tbody>
+                        <?php if (empty($requests)) : ?>
+    <tr>
+        <td colspan="4">No requests available</td>
+    </tr>
+<?php else : ?>
                               <?php foreach ($requests as $index => $request) : ?>
                                     <tr>
                                           <td><?= $index + 1; ?></td>
@@ -129,10 +136,10 @@ if ($result1->num_rows > 0) {
                                                       $user_count = $row['user_count'];
                                                 }
                                                 if ($user_count >= $count) {
-                                                      echo '<button class="rejectButton" id="rejectButton" data-id="' . $request['id'] . '">Reject</button>';
+                                                      echo '<button class="rejectButton btn btn-primary" id="rejectButton" data-id="' . $request['id'] . '">Reject</button>';
                                                       echo '<div id="message_' . $request['id'] . '" style="display: none;"></div>';
                                                 } else {
-                                                      echo '<button class="acceptButton" id="acceptButton" data-id="' . $request['id'] . '">Accept</button>';
+                                                      echo '<button class="acceptButton btn btn-primary" id="acceptButton" data-id="' . $request['id'] . '">Accept</button>';
                                                       echo '<div id="message_' . $request['id'] . '" style="display: none;"></div>';
                                                 }
 
@@ -142,6 +149,7 @@ if ($result1->num_rows > 0) {
                                           </td>
                                     </tr>
                               <?php endforeach; ?>
+                              <?php endif; ?>
                         </tbody>
 
                   </table>
@@ -154,4 +162,3 @@ if ($result1->num_rows > 0) {
 include('footer.php');
 
 
-?>

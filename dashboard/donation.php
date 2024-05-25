@@ -25,9 +25,7 @@ if ($result->num_rows > 0) {
                         <a href="donation.php" class="btn btn-primary">
                               <i class='bx bx-plus'></i> Back
                         </a>
-                        <a href="donation-users.php" class="btn btn-primary">
-                              <i class='bx bx-plus'></i> Request Lists
-                        </a>
+                     
                         <a href="create-donation.php" class="btn btn-primary">
                               <i class='bx bx-plus'></i> Add Donation
                         </a>
@@ -44,6 +42,8 @@ if ($result->num_rows > 0) {
                                     <th scope="col">Organization Name Type</th>
                                     <th scope="col">Organization Location</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Status </th>
+
                               </tr>
                         </thead>
                         <tbody>
@@ -56,6 +56,12 @@ if ($result->num_rows > 0) {
                                           <td><?= $donation['organization_name'] ?></td>
                                           <td><?= $donation['organization_location'] ?></td>
                                           <td><?= $donation['status'] ?></td>
+                                          <td>
+                                                      <div class="d-flex gap-2">
+                                                      <a href="edit-donation.php/?id=<?= $donation['id'] ?>" class='btn btn-primary'>Edit</a>
+                                                      <a href="delete-donation.php/?id=<?= $donation['id'] ?>" class='btn btn-primary'>Delete</a>
+                                                      </div>
+                                                </td>
                                     </tr>
                               <?php endforeach ?>
                         </tbody>
@@ -65,6 +71,13 @@ if ($result->num_rows > 0) {
             </div>
       </div>
 </div>
+<?=
+      isset($_SESSION['status']) ? '
+<p id="status">' . $_SESSION['status'] .
+            '</p>
+' : '';
+      unset($_SESSION['status']);
+      ?>
 <?php
 include('footer.php');
 

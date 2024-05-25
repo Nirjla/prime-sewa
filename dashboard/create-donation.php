@@ -1,5 +1,9 @@
 <?php
+session_start();
 include('header.php');
+if (isset($_SESSION['user_id'])) {
+      // echo $user_id;
+}
 ?>
 <div class="container mt-5">
       <div class="card">

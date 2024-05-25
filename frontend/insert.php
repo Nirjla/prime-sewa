@@ -86,7 +86,7 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
             if ($query_execute) {
                   // sendemail_verify("$name", "$email", "$verify_token");
                   // session_start();
-                  $_SESSION['status'] = 'Registration Successful! Please Verify your Email Address';
+                  $_SESSION['status'] = 'Registration Successful!';
                   header("Location: register.php");
                   exit();
             } else {

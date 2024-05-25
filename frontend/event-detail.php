@@ -5,18 +5,16 @@ if ($conn->connect_error) {
 }
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $event_id = $_GET['id'];
-      echo $event_id;
+      // echo $event_id;
       $query = "SELECT * FROM events WHERE id = $event_id";
 
       $result = $conn->query($query);
 
 
-      if ($result) {
-            echo "It is working";
-      }
+    
       if ($result->num_rows > 0) {
             $event = $result->fetch_assoc();
-            print_r($event);
+            // print_r($event);
             //print_r($volunteer);
             // print_r($event);
             // print_r($users);

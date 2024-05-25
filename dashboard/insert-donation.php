@@ -12,12 +12,12 @@ function sanitizeInput($data)
       return $data;
 }
 if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
-      $user_id = 1;
+      // $user_id = 1;
       if (isset($_SESSION['user_id'])) {
-            echo $user_id;
+            $user_id = $_SESSION['user_id'];
       }
       $donation_title = ($_POST['donation-title']);
-      echo $donation_title;
+      // echo $donation_title;
       $donation_name = sanitizeInput($_POST['donation-name']);
       $donation_location = sanitizeInput($_POST['donation-location']);
       $status = sanitizeInput($_POST['status']);
@@ -29,12 +29,12 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
       // echo $filename;
       // print_r($_FILES['donation-img']['error']);
       $targetFilePath = $targetDir . $filename;
-      if (move_uploaded_file($_FILES['donation-img']['tmp_name'], $targetFilePath)) {
-            echo $filename . "success";
-      }
-      else{
-            echo "Error: " . $_FILES['donation-img']['error'];
-      }
+      move_uploaded_file($_FILES['donation-img']['tmp_name'], $targetFilePath);
+      // echo $filename . "success";
+
+
+      echo "Error: " . $_FILES['donation-img']['error'];
+
       $uploadMaxFileSize = ini_get('upload_max_filesize');
       $postMaxSize = ini_get('post_max_size');
 
@@ -45,7 +45,12 @@ if (isset($_SERVER['REQUEST_METHOD']) == 'POST') {
       try {
             $insert_query =  $conn->prepare('INSERT INTO donations (user_id,donation_title,donation_desc,donation_img,organization_name,organization_location,status) VALUES (?,?,?,?,?,?,?)');
             $result = $insert_query->bind_param('isssssi', $user_id, $donation_title, $donation_desc, $targetFilePath, $donation_name, $donation_location, $status);
-            echo $result;
+            if ($insert_query->execute()) {
+                  $_SESSION['status'] = "Data inserted successfully";
+                  header("Location:" . $_SERVER['HTTP_REFERER']);
+                  exit();
+            }
+            // echo $result;
       } catch (Exception $e) {
             die('Error' . $e->getMessage());
       }

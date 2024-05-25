@@ -8,15 +8,17 @@ session_start();
 //       exit();
 // }
 if(isset($_SESSION['AdminLogin'])){
-      unset($_SESSION['AdminLogin']);
+      // unset($_SESSION['AdminLogin']);
       session_destroy();
+      // $_SESSION['logged_out'] = "Logged Out Successfully";
       header('Location:index.php?status=loggedout');
       exit();
 
 }
 if(isset($_SESSION['UserLogin'])){
-      unset($_SESSION['UserLogin']);
       session_destroy();
+      // unset($_SESSION['UserLogin']);
+      // $_SESSION['logged_out'] = "Logged Out Successfully";
       header('Location:index.php?status=loggedout');
       exit();
 

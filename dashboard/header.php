@@ -1,17 +1,17 @@
 <?php
 session_start();
 $user_id = $_SESSION['user_id'];
-echo $user_id;
+// echo $user_id;
 include "../frontend/db.php";
 if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
 }
 $query = "SELECT * FROM `settings` ORDER BY `created_at` DESC LIMIT 1";
 $result = $conn->query($query);
-print_r($result);
+// print_r($result);
 if($result){
    $row= $result->fetch_assoc();
-   print_r($row);
+//    print_r($row);
 }
 ?>
 

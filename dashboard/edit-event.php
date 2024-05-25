@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+// include('header.php');
 session_start();
 include "../frontend/db.php";
 
@@ -14,13 +14,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $result = $conn->query($query);
       if ($result->num_rows > 0) {
             $event = $result->fetch_assoc();
-            print_r($event);
+            // print_r($event);
             // $_SESSION['status'] = "Data inserted successfully";
       }
 }
 
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>Dashboard - SB Admin</title>
+      <!-- bootstrap link -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+      <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+      <link href="css/style.css" rel="stylesheet" />
+      <link href="css/styles.css" rel="stylesheet" />
+      <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+      <!-- boxicons -->
+      <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+      <!-- google icon -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+      
+
 <section>
       <div class="container mt-5">
             <div class="card">
@@ -139,4 +164,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       unset($_SESSION['status']);
       ?>
 </section>
-<?php include('footer.php') ?>
+</body>
+</html>

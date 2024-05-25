@@ -37,7 +37,7 @@ function getUserName($conn,$user_id){
       $result = mysqli_query($conn, $query);
       if($result){
             $row = mysqli_fetch_assoc($result);
-            print_r($row);
+            // print_r($row);
             return $row['name'];
       }
 

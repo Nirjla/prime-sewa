@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
       $stmt = $conn ->prepare($query);
       $stmt ->bind_param('s', $fieldValue);
       $stmt->execute();
-      print_r($stmt);
+      // print_r($stmt);
 
 }
 ?>
